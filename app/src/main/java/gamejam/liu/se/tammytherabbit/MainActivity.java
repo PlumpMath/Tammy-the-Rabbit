@@ -2,18 +2,69 @@ package gamejam.liu.se.tammytherabbit;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    private Button buttonEat;
+    private Button buttonClean;
+    private Button buttonPay;
+    private Button buttonPlay;
+    private Button buttonKill;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
+        buttonEat = (Button) findViewById(R.id.buttonEat);
+        buttonEat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("MainActivity", "EAAAT");
+            }
+        });
+
+        buttonPay = (Button) findViewById(R.id.buttonPay);
+        buttonPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("MainActivity", "PAAY");
+            }
+        });
+
+        buttonClean = (Button) findViewById(R.id.buttonClean);
+        buttonClean.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("MainActivity", "CLEAN");
+            }
+        });
+
+
+        buttonPlay = (Button) findViewById(R.id.buttonPlay);
+        buttonPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("MainActivity", "PLAAAY");
+
+            }
+        });
+
+        buttonKill = (Button) findViewById(R.id.buttonKill);
+        buttonKill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("MainActivity", "KIIILL");
+
+            }
+        });
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
