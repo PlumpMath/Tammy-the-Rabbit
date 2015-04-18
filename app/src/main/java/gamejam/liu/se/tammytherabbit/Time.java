@@ -1,18 +1,16 @@
 package gamejam.liu.se.tammytherabbit;
 
-import android.app.IntentService;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
- import static java.util.concurrent.TimeUnit.*;
+import static java.util.concurrent.TimeUnit.*;
 
-import java.util.Calendar;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
@@ -22,11 +20,12 @@ import java.util.concurrent.ScheduledExecutorService;
  * This class keeps track of time for us and spawns the appropriate
  */
 public class Time extends Service {
-    Calendar c = Calendar.getInstance();
-    long startTime;
-    int notificationID = 1;
+    private final IBinder binder = new TimeBinder();
+    private long startTime;
+    private int notificationID = 1;
     private final ScheduledExecutorService scheduler =
             Executors.newScheduledThreadPool(1);
+    private int numberOfShits = 0;
 
     public Time() {
         super();
@@ -34,8 +33,8 @@ public class Time extends Service {
 
     @Override
     public void onCreate() {
-        startTime = c.getTimeInMillis();
-
+        startTime = System.currentTimeMillis();
+        scheduler.scheduleAtFixedRate(new TimedEvent(this), 1, 1, SECONDS);
     }
 
     @Override
@@ -49,7 +48,7 @@ public class Time extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return binder;
     }
 
     private void createNotification(String title, String message) {
@@ -62,7 +61,6 @@ public class Time extends Service {
                         .setContentText(message);
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(this.NOTIFICATION_SERVICE);
-        // mId allows you to update the notification later on.
 
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(this, 0, resultIntent,
@@ -71,4 +69,26 @@ public class Time extends Service {
 
         mNotificationManager.notify(notificationID, mBuilder.build());
     }
+    public long getStartTime() {
+        return startTime;
+    }
+    public void addShit(){
+        numberOfShits++;
+        Log.d("RabbitTime", "Shits added");
+    }
+    public int getShitCount(){
+        return numberOfShits;
+    }
+    public void cleanShit() {
+        numberOfShits--;
+    }
+
+    public class TimeBinder extends Binder {
+        Time getService() {
+            // Return this instance of Time so clients can call public methods
+            return Time.this;
+        }
+    }
 }
+
+

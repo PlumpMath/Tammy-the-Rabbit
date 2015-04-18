@@ -20,15 +20,16 @@ public class MainActivity extends ActionBarActivity {
     private Button buttonKill;
     private ImageButton touchRabbit;
     private Rabbit rabbit = new Rabbit(this);
+    private TimeConnection tc = new TimeConnection();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         Intent intent = new Intent(this, Time.class);
         this.startService(intent);
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        this.bindService(intent, tc, BIND_AUTO_CREATE);
 
         buttonEat = (Button) findViewById(R.id.buttonEat);
         buttonEat.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +52,8 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Log.d("MainActivity", "CLEAN");
+
+                displayShit(1); // TODO: Fix IPC with Time.
             }
         });
 
@@ -72,6 +75,12 @@ public class MainActivity extends ActionBarActivity {
 
         touchRabbit = (ImageButton) findViewById(R.id.rabbitButton);
         touchRabbit.setOnClickListener(rabbit);
+    }
+
+    private void displayShit(int numberOfShits){
+        for (int i = 0; i < numberOfShits; i++){
+            // TODO: Implement the display of crap on the screen.
+        }
     }
 
     @Override
