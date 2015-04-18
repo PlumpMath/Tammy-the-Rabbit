@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -16,6 +17,8 @@ public class MainActivity extends ActionBarActivity {
     private Button buttonPay;
     private Button buttonPlay;
     private Button buttonKill;
+    private ImageButton touchRabbit;
+    private Rabbit rabbit = new Rabbit();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +49,11 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-
         buttonPlay = (Button) findViewById(R.id.buttonPlay);
         buttonPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("MainActivity", "PLAAAY");
-
             }
         });
 
@@ -61,9 +62,12 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Log.d("MainActivity", "KIIILL");
-
             }
         });
+
+        touchRabbit = (ImageButton) findViewById(R.id.rabbitButton);
+        buttonKill.setOnClickListener(rabbit);
+
     }
 
     @Override
