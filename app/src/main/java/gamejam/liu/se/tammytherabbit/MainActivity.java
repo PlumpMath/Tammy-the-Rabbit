@@ -17,16 +17,21 @@ public class MainActivity extends ActionBarActivity {
     private Button buttonPlay;
     private Button buttonKill;
 
+    private Rabbit rabbit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        rabbit = new Rabbit();
 
         buttonEat = (Button) findViewById(R.id.buttonEat);
         buttonEat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("MainActivity", "EAAAT");
+                rabbit.eat();
             }
         });
 
