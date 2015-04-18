@@ -1,5 +1,7 @@
 package gamejam.liu.se.tammytherabbit;
 
+import android.app.IntentService;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +13,6 @@ import android.widget.ImageButton;
 
 
 public class MainActivity extends ActionBarActivity {
-
     private Button buttonEat;
     private Button buttonClean;
     private Button buttonPay;
@@ -22,6 +23,10 @@ public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Intent intent = new Intent(this, Time.class);
+        this.startService(intent);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
