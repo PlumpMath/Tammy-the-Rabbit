@@ -13,8 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/rabbit"
-        android:baselineAlignBottom="true"
-        android:onClick="Rabbit.onClick()" />
+        android:baselineAlignBottom="true" />
 
     <HorizontalScrollView
         android:layout_width="wrap_content"
